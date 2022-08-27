@@ -7,9 +7,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - name: zip
-        uses: montudor/action-zip@v0.1.0
-        with:
-          args: zip -qq -r ./lambda.zip ./
+        run: |
+        pip install --target . -r requirements.txt
+        zip -r ./lambda.zip ./
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
