@@ -8,8 +8,8 @@ jobs:
       - uses: actions/checkout@v1
       - name: zip
         run: |
-        pip install --target . -r requirements.txt
-        zip -r ./lambda.zip ./
+          pip install --target . -r requirements.txt
+          zip -r ./lambda.zip ./
       - name: default deploy
         uses: appleboy/lambda-action@master
         with:
