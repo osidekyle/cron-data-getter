@@ -30,7 +30,7 @@ def getData(event, context):
                 else:
                     newsDataDictionary["author"].append(article.find_all("dc:creator")[0].string)
             except Exception as e:
-                newsDataDictionary["author"].append(pd.nu)
+                newsDataDictionary["author"].append("")
             newsDataDictionary["date"].append(article.pubdate.string)
             newsDataDictionary["link"].append(article.link.string)
             newsDataDictionary["source"].append(source)
