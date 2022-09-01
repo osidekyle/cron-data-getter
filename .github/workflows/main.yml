@@ -5,6 +5,8 @@ jobs:
     name: build and deploy lambda
     runs-on: ubuntu-latest
     steps:
+      - name: Make artifact directory
+        run: mkdir -p ./artifacts
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v2
         with:
