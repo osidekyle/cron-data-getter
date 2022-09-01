@@ -1,6 +1,9 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import requests
+import boto3
+from io import StringIO
+from datetime import date
 
 def getData(event, context):
     print("Hello world")
@@ -38,6 +41,12 @@ def getData(event, context):
         dataframe = pd.DataFrame.from_dict(newsDataDictionary)
         pd.set_option('display.max_columns', None)
 
-        print(dataframe.head(5))
+        bucket = "news-data-kvh"
+        csv_buffer = StringIO()
+        dataframe.to_csv(csv_buffer)
+
+        s3_resource = boto3.resource("s3")
+        s3_resource.Object(bucket, f"{date.today()}.csv").put(Body=csv_buffer.getvalue())
+
 
 
