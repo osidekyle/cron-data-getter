@@ -7,6 +7,8 @@ jobs:
     steps:
       - name: Make artifact directory
         run: mkdir -p ./artifacts
+      - name: List files
+        run: ls
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v2
         with:
