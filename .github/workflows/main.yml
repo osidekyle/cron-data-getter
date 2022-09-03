@@ -5,8 +5,8 @@ jobs:
     name: build and deploy lambda
     runs-on: ubuntu-latest
     steps:
-      - name: Make artifact directory
-        run: mkdir -p ./artifacts/cron-data-getter
+#      - name: Make artifact directory
+#        run: mkdir -p ./artifacts/cron-data-getter
 
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v2
@@ -15,13 +15,13 @@ jobs:
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -r ./artifacts/cron-data-getter/lambda.zip ./
+          args: zip -r lambda.zip ./
 
       - name: Upload to S3
-        uses: jakejarvis/s3-sync-action@v0.3.1
+        uses: medlypharmacy/s3-artifacts-action@master
         env:
-          SOURCE_DIR: './artifacts/lambda.zip'
-          AWS_REGION: 'us-west-1'
-          AWS_S3_BUCKET: 'news-artifacts-kvh'
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          source_path: './lambda.zip'
+          aws_region: 'us-west-1'
+          aws_s3_bucket_name: 'news-artifacts-kvh'
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
