@@ -15,7 +15,7 @@ jobs:
       - name: Create Zip File
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -r ./artifacts/cron-data-getter/lambda.zip .
+          args: zip -r ./artifacts/cron-data-getter/lambda.zip ./
 
       - name: Upload to S3
         uses: jakejarvis/s3-sync-action@v0.3.1
