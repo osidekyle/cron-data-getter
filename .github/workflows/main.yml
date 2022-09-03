@@ -19,7 +19,7 @@ jobs:
 
       - name: Upload to S3
         uses: medlypharmacy/s3-artifacts-action@master
-        env:
+        with:
           source_path: './lambda.zip'
           aws_region: 'us-west-1'
           aws_s3_bucket_name: 'news-artifacts-kvh'
