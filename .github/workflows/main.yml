@@ -6,14 +6,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Make artifact directory
-          run: mkdir -p ./artifacts/cron-data-getter
+        run: mkdir -p ./artifacts/cron-data-getter
+
       - uses: actions/checkout@v1
       - uses: actions/setup-python@v2
         with:
             python-version: '3.9'
       - name: Create Zip File
-          uses: montudor/action-zip@v0.1.0
-          with:
+        uses: montudor/action-zip@v0.1.0
+        with:
           args: zip -r ./artifacts/cron-data-getter/lambda.zip .
 
       - name: Upload to S3
