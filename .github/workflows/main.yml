@@ -24,8 +24,9 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           destination_path: "./lambda.zip"
-         uses: jannekem/run-python-script-action@v1
-         with:
+      - name: Update Lambda code
+        uses: jannekem/run-python-script-action@v1
+        with:
             script: |
               import boto3
               set_env("aws_access_key_id", ${{ secrets.AWS_ACCESS_KEY_ID }})
