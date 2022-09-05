@@ -6,9 +6,6 @@ from io import StringIO
 from datetime import date
 
 def getData(event, context):
-    print("Hello world")
-
-
     newsUrls = [["https://rss.nytimes.com/services/xml/rss/nyt/US.xml", "NY Times"]]
 
     newsDataDictionary = {
@@ -47,6 +44,3 @@ def getData(event, context):
 
         s3_resource = boto3.resource("s3")
         s3_resource.Object(bucket, f"{date.today()}.csv").put(Body=csv_buffer.getvalue())
-
-
-
