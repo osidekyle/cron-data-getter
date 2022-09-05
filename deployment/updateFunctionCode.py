@@ -1,6 +1,6 @@
 import boto3
 
-client = boto3.client("lambda", region_name="us-west-1")
+client = boto3.client("lambda")
 client.update_function_code(
     FunctionName='cron-job-data-getter',
     S3Bucket='news-artifacts-kvh',
