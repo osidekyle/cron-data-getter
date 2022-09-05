@@ -1,5 +1,1 @@
-pandas
-beautifulsoup4
-requests
-lxml
 boto3

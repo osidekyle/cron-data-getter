@@ -12,9 +12,11 @@ jobs:
             python-version: '3.9'
       - name: zip
         run: |
+          cd ./src
           python -m pip install --upgrade pip
           pip install --target . -r requirements.txt
-          zip -r ./lambda.zip ./
+          zip -r ../lambda.zip ./
+          cd ..
       - name: Upload to S3
         uses: medlypharmacy/s3-artifacts-action@master
         with:
@@ -24,6 +26,10 @@ jobs:
           aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           destination_path: "./lambda.zip"
+      - name: Install dependencies for update code step
+          run: |
+            python -m pip install --upgrade pip
+            pip install --target . -r requirements.txt
       - name: Update Lambda code
         uses: jannekem/run-python-script-action@v1
         with:
