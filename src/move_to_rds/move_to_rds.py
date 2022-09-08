@@ -1,6 +1,5 @@
 import sys
 import logging
-import rds_config
 import pymysql
 from creds import *
 
