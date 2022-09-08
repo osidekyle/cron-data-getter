@@ -10,22 +10,38 @@ jobs:
       - uses: actions/setup-python@v2
         with:
             python-version: '3.9'
-      - name: zip
+      - name: zip data getter
         run: |
-          cd ./src
+          cd ./src/data_getter
           python -m pip install --upgrade pip
           pip install --target . -r requirements.txt
-          zip -r ../lambda.zip ./
-          cd ..
-      - name: Upload to S3
+          zip -r ../../data_getter.zip ./
+          cd ../../
+      - name: Upload data getter to S3
         uses: medlypharmacy/s3-artifacts-action@master
         with:
-          SOURCE_PATH: './lambda.zip'
+          SOURCE_PATH: './data_getter.zip'
           AWS_REGION: 'us-west-1'
           AWS_S3_BUCKET_NAME: 'news-artifacts-kvh'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DESTINATION_PATH: "./lambda.zip"
+          DESTINATION_PATH: "./data_getter.zip"
+      - name: zip move to RDS
+        run: |
+          cd ./src/move_to_rds
+          python -m pip install --upgrade pip
+          pip install --target . -r requirements.txt
+          zip -r ../../move_rds.zip ./
+          cd ../../
+      - name: Upload RDS function to S3
+        uses: medlypharmacy/s3-artifacts-action@master
+        with:
+          SOURCE_PATH: './move_rds.zip'
+          AWS_REGION: 'us-west-1'
+          AWS_S3_BUCKET_NAME: 'news-artifacts-kvh'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DESTINATION_PATH: "./move_rds.zip"
       - name: Install dependencies for update code step and update function code
         run: |
             cd deployment
