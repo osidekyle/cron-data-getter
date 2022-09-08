@@ -1,19 +1,19 @@
 import sys
+import os
 import logging
 import pymysql
-from creds import *
 
 #rds settings
-rds_host  = "free-database.c8fs149ou9i7.us-west-1.rds.amazonaws.com"
-name = username
-password = password
-db_name = table_name
+rds_host  = os.environ['RDS_HOST']
+name = os.environ['USERNAME']
+password = os.environ['PASSWORD']
+db_name = os.environ['DB_NAME']
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
 try:
-    conn = pymysql.connect(host=rds_host, user=name, passwd=password, db=db_name, connect_timeout=5)
+    conn = pymysql.connect(host=rds_host, user=name, password=password, db=db_name, connect_timeout=5)
 except pymysql.MySQLError as e:
     logger.error("ERROR: Unexpected error: Could not connect to MySQL instance.")
     logger.error(e)
