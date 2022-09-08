@@ -2,13 +2,13 @@ import sys
 import logging
 import rds_config
 import pymysql
-import creds
+from creds import *
 
 #rds settings
 rds_host  = "free-database.c8fs149ou9i7.us-west-1.rds.amazonaws.com"
-name = rds_config.db_username
-password = rds_config.db_password
-db_name = rds_config.db_name
+name = username
+password = password
+db_name = table_name
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -26,19 +26,4 @@ def handler(event, context):
     This function fetches content from MySQL RDS instance
     """
 
-    item_count = 0
-
-    with conn.cursor() as cur:
-        cur.execute("create table Employee ( EmpID  int NOT NULL, Name varchar(255) NOT NULL, PRIMARY KEY (EmpID))")
-        cur.execute('insert into Employee (EmpID, Name) values(1, "Joe")')
-        cur.execute('insert into Employee (EmpID, Name) values(2, "Bob")')
-        cur.execute('insert into Employee (EmpID, Name) values(3, "Mary")')
-        conn.commit()
-        cur.execute("select * from Employee")
-        for row in cur:
-            item_count += 1
-            logger.info(row)
-            #print(row)
-    conn.commit()
-
-    return "Added %d items from RDS MySQL table" %(item_count)
+    return "Hello world!"
