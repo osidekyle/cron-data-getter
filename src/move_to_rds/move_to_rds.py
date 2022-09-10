@@ -39,6 +39,6 @@ def handler(event, context):
 
     df = pd.read_csv(file_content)
 
-    df.head(10)
+    print(df.head(10))
 
     return "Hello world!"
