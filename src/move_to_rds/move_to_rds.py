@@ -34,8 +34,12 @@ def handler(event, context):
 
     s3 = boto3.client("s3")
 
+    print("Before read")
+
     file_content = s3.get_object(
         Bucket=bucket_name, Key=key_name)["Body"].read()
+
+    print("After read")
 
     df = pd.read_csv(file_content)
 
