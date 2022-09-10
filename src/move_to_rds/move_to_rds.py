@@ -2,6 +2,8 @@ import sys
 import os
 import logging
 import pymysql
+import boto3
+import pandas as pd
 
 #rds settings
 rds_host  = os.environ['RDS_HOST']
@@ -24,5 +26,19 @@ def handler(event, context):
     """
     This function fetches content from MySQL RDS instance
     """
+
+    # bucket_name = event['Records'][0]['s3']['bucket']['name']
+    # key_name = event['Records'][0]['s3']['object']['key']
+    bucket_name ='news-data-kvh'
+    key_name = "2022-09-09.csv"
+
+    s3_resource = boto3.resource("s3")
+
+    file_content = s3_resource.get_object(
+        Bucket=bucket_name, Key=key_name)["Body"].read()
+
+    df = pd.read_csv(file_content)
+
+    df.show()
 
     return "Hello world!"
