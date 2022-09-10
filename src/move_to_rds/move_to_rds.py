@@ -37,7 +37,7 @@ def handler(event, context):
     print("Before read")
 
     file_content = s3.get_object(
-        Bucket=bucket_name, Key=key_name)["Body"].read()
+        Bucket=bucket_name, Key=key_name)["Body"]
 
     print("After read")
 
