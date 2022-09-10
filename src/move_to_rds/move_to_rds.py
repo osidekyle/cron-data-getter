@@ -32,9 +32,9 @@ def handler(event, context):
     bucket_name ='news-data-kvh'
     key_name = "2022-09-09.csv"
 
-    s3_resource = boto3.resource("s3")
+    s3 = boto3.client("s3")
 
-    file_content = s3_resource.get_object(
+    file_content = s3.get_object(
         Bucket=bucket_name, Key=key_name)["Body"].read()
 
     df = pd.read_csv(file_content)
