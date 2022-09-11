@@ -14,8 +14,11 @@ def getData(event, context):
         "author": [],
         "date": [],
         "link": [],
-        "source": []
+        "source": [],
+        "createdDate": []
     }
+
+    today = date.today()
 
     for [url, source] in newsUrls:
         req = requests.get(url)
@@ -34,6 +37,7 @@ def getData(event, context):
             newsDataDictionary["date"].append(article.pubdate.string)
             newsDataDictionary["link"].append(article.link.string)
             newsDataDictionary["source"].append(source)
+            newsDataDictionary["createdDate"].append(today)
 
         dataframe = pd.DataFrame.from_dict(newsDataDictionary)
         pd.set_option('display.max_columns', None)

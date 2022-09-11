@@ -39,6 +39,9 @@ def handler(event, context):
 
     df = pd.read_csv(file_content)
 
-    print(df.head(10))
+    with conn.cursor() as cur:
+        cur.execute("create table NewsStories ( title varchar(255) NOT NULL, description varchar(255) NOT NULL, author varchar(255) NOT NULL, date varchar(255) NOT NULL, link varchar(255) NOT NULL, source varchar(255) NOT NULL, created_date DATE NOT NULL, PRIMARY KEY (Link))")
+        df.to_sql(con=conn, name='NewsStories', if_exists='replace', flavor='mysql')
+
 
     return "Hello world!"
