@@ -17,11 +17,6 @@ jobs:
           pip install --target . -r requirements.txt
           zip -r ../../data_getter.zip ./
           cd ../../
-      - name: list
-        run: |
-            cd ./src/data_getter
-            ls
-            cd ../../
       - name: Upload data getter to S3
         uses: medlypharmacy/s3-artifacts-action@master
         with:
