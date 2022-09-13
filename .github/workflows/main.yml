@@ -12,10 +12,10 @@ jobs:
             python-version: '3.9'
       - name: zip data getter
         run: |
+          ls
           cd ./src/data_getter
           python -m pip install --upgrade pip
           pip install --target . -r requirements.txt
-          ls
           zip -r ../../data_getter.zip ./
           cd ../../
       - name: Upload data getter to S3
