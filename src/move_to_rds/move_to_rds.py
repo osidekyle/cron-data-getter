@@ -31,7 +31,7 @@ def handler(event, context):
     # bucket_name = event['Records'][0]['s3']['bucket']['name']
     # key_name = event['Records'][0]['s3']['object']['key']
     bucket_name ='news-data-kvh'
-    key_name = "2022-09-09.csv"
+    key_name = "2022-09-13.csv"
 
     s3 = boto3.client("s3")
 
