@@ -44,7 +44,7 @@ def getData(event, context):
 
         bucket = "news-data-kvh"
         csv_buffer = StringIO()
-        dataframe.to_csv(csv_buffer)
+        dataframe.to_csv(csv_buffer, index=False)
 
         s3_resource = boto3.resource("s3")
         s3_resource.Object(bucket, f"{date.today()}.csv").put(Body=csv_buffer.getvalue())

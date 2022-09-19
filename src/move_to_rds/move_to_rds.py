@@ -43,7 +43,6 @@ def handler(event, context):
     engine = create_engine("mysql+mysqlconnector://{user}:{pw}@{host}/{db}".format(user=name, pw=password, host=rds_host, db=db_name))
 
     with conn.cursor() as cur:
-        cur.execute("drop table NewsStories")
         cur.execute("create table IF NOT EXISTS NewsStories(id int NOT NULL AUTO_INCREMENT, title varchar(255) NOT NULL, description varchar(255) NOT NULL, author varchar(255) NOT NULL, date varchar(255) NOT NULL, link varchar(255) NOT NULL, source varchar(255) NOT NULL, created_date DATE NOT NULL, PRIMARY KEY (id))")
         df.to_sql(con=engine, name='NewsStories', if_exists='append', index=False)
         conn.commit()
