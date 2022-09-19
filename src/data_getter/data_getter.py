@@ -37,7 +37,7 @@ def getData(event, context):
             newsDataDictionary["date"].append(article.pubdate.string)
             newsDataDictionary["link"].append(article.guid.string)
             newsDataDictionary["source"].append(source)
-            newsDataDictionary["createdDate"].append(today)
+            newsDataDictionary["created_date"].append(today)
 
         dataframe = pd.DataFrame.from_dict(newsDataDictionary)
         pd.set_option('display.max_columns', None)
