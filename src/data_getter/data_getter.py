@@ -15,7 +15,7 @@ def getData(event, context):
         "date": [],
         "link": [],
         "source": [],
-        "createdDate": []
+        "created_date": []
     }
 
     today = date.today()
