@@ -35,7 +35,7 @@ def getData(event, context):
             except Exception as e:
                 newsDataDictionary["author"].append("")
             newsDataDictionary["date"].append(article.pubdate.string)
-            newsDataDictionary["link"].append(article.link.string)
+            newsDataDictionary["link"].append(article.guid.string)
             newsDataDictionary["source"].append(source)
             newsDataDictionary["createdDate"].append(today)
 
