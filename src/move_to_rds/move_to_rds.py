@@ -50,5 +50,3 @@ def handler(event, context):
         for row in cur:
             print(row)
     conn.commit()
-
-    return "Hello world!"
