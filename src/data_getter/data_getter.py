@@ -40,7 +40,6 @@ def getData(event, context):
             newsDataDictionary["created_date"].append(today)
 
         dataframe = pd.DataFrame.from_dict(newsDataDictionary)
-        pd.set_option('display.max_columns', None)
 
         bucket = "news-data-kvh"
         csv_buffer = StringIO()
