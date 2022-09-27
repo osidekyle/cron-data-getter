@@ -42,7 +42,7 @@ def handler(event, context):
 
     with conn.cursor() as cur:
         cur.execute("create table IF NOT EXISTS NewsStories(title varchar(255) NOT NULL, description varchar(255), author varchar(255), date varchar(255), link varchar(255) NOT NULL, source varchar(255) NOT NULL, created_date varchar(255) NOT NULL, PRIMARY KEY (link))")
-        df.to_sql(con=engine, name='NewsStories', if_exists='replace', index=False)
+        df.to_sql(con=engine, name='NewsStories', if_exists='append', index=False)
         conn.commit()
         cur.execute("select * from NewsStories")
         for row in cur:
